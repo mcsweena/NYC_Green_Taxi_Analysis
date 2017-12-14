@@ -35,23 +35,31 @@ def test_point(lat, long, zones):
     return "XX00"
 
 def main():
+    # Columns to read into memory
     green_names = ['pickup_datetime', 'dropoff_datetime', 'Pickup_longitude',
                    'Pickup_latitude', 'Dropoff_longitude', 'Dropoff_latitude',
                    'Passenger_count','Trip_distance','Fare_amount','Tip_amount',
                    'Total_amount', 'Payment_type', 'Trip_type']
 
+    # Import geographic lat/long boundaries for each neighbourhood
     df = pd.read_csv('geographic.csv')
 
+    # Import data
     green_cabs = pd.read_csv('../data/interim/2015_Green_Taxi_Trip_Data_11262015.csv',
                              usecols=green_names)
 
+    # Stop/Start points
     start = 0
-    stop = 49815
+    #stop = 49815
+    stop = 10
 
     zones = {}
 
+    #Output filename
     output_filename = '../data/processed/zones_data_11262015.csv'
 
+
+    # process geographic.csv file into usable zone lists
     for i, nbrhood in enumerate(df):
         boundary = df[nbrhood].as_matrix().reshape(int(df[nbrhood].size / 2),2)
         boundary = boundary[~np.isnan(boundary)]
@@ -61,7 +69,7 @@ def main():
             bd.append(k)
         zones[nbrhood] = bd
 
-
+    # Process dataframe
     for row in range(start, stop):
         pu_time, do_time = green_cabs.ix[row, :].values[0], green_cabs.ix[row,
                                                            :].values[1]
@@ -77,7 +85,7 @@ def main():
         payment_type = green_cabs.ix[row, :].values[11]
         trip_type = green_cabs.ix[row, :].values[12]
 
-
+        # Write processed data to new datafile
         with open(output_filename, "a") as file:
             file.write(pu_time + ',' + do_time + ',' + test_point(pu_lat, pu_long, zones) + ','
                        + test_point(do_lat, do_long, zones) + ',' +str(pass_count) + ','
