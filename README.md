@@ -1,7 +1,24 @@
 NYC_Green_Taxi_Analysis
 ==============================
 
-Analysis of 2015 NYC Green Taxi pickup and dropoff data
+Task
+------------
+The dataset is available at the following URL and captures green taxi activity in NYC in 2015: https://data.cityofnewyork.us/Transportation/2015-Green-Taxi-Trip-Data/gi8d-wdg5/about
+
+As a general guideline, the objective is to find a few recommendations that you would give to a green taxi driver in NYC.
+
+We would hope that this exercise will help you demonstrate some of the following analytics skills that would make you successful here at CurrencyFair:
+
+· Data acquisition & wrangling
+
+· Data visualisation
+
+· Predictive modelling
+
+There are no restrictions around the tools or methods you can use.
+
+You are of course allowed to enrich the dataset with any other dataset you might find useful.
+
 
 Project Organization
 ------------
